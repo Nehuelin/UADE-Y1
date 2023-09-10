@@ -366,7 +366,13 @@ if ejercicio == 2:
     def reset(matriz):
         for f in range(filas):
             for c in range(columnas):
-                matriz[f][c] = 0                
+                matriz[f][c] = 0   
+                
+    def imprimirmatriz(matriz):
+        for fila in matriz:
+            for elemento in fila:
+                print("%3d" %elemento, end=" ")
+            print()                     
     
     factor = int(input("Ingresar numero N: "))
     
@@ -375,66 +381,39 @@ if ejercicio == 2:
     matriz = [[0]*columnas for i in range(filas)]
     
     matrizalpha(matriz)
-    for fila in matriz:
-        for elemento in fila:
-            print("%3d" %elemento, end=" ")
-        print()
+    imprimirmatriz(matriz)
     print()
     reset(matriz)
     matrizbravo(matriz)
-    for fila in matriz:
-        for elemento in fila:
-            print("%3d" %elemento, end=" ")
-        print()
+    imprimirmatriz(matriz)
     print()
     reset(matriz)    
     matrizcharlie(matriz)
-    for fila in matriz:
-        for elemento in fila:
-            print("%3d" %elemento, end=" ")
-        print()
+    imprimirmatriz(matriz)
     print()
     reset(matriz)
     matrizdelta(matriz)
-    for fila in matriz:
-        for elemento in fila:
-            print("%3d" %elemento, end=" ")
-        print()
+    imprimirmatriz(matriz)
     print()
     reset(matriz)
     matrizecho(matriz)
-    for fila in matriz:
-        for elemento in fila:
-            print("%3d" %elemento, end=" ")
-        print()
+    imprimirmatriz(matriz)
     print()
     reset(matriz)
     matrizfoxtrot(matriz)
-    for fila in matriz:
-        for elemento in fila:
-            print("%3d" %elemento, end=" ")
-        print()
+    imprimirmatriz(matriz)
     print()
     reset(matriz)
     matrizgolf(matriz)
-    for fila in matriz:
-        for elemento in fila:
-            print("%3d" %elemento, end=" ")
-        print()
+    imprimirmatriz(matriz)
     print()
     reset(matriz)
     matrizhotel(matriz)
-    for fila in matriz:
-        for elemento in fila:
-            print("%3d" %elemento, end=" ")
-        print()
+    imprimirmatriz(matriz)
     print()
     reset(matriz)
     matrizindia(matriz)
-    for fila in matriz:
-        for elemento in fila:
-            print("%3d" %elemento, end=" ")
-        print()
+    imprimirmatriz(matriz) 
     print()
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
@@ -484,7 +463,7 @@ if ejercicio == 4:
     print("d- Cual es el dia mas productivo, considerando todas las fabricas combinadas.")
     print("e- Crear una lista por comprension que contenga la menor cantidad fabricada por cada fabrica.")
     print()
-    time.sleep(0)
+    time.sleep(8)
     
     def rellenarmatriz(matriz):
         filas = len(matriz)
@@ -545,7 +524,7 @@ if ejercicio == 4:
     
     menorfabricada = [min(fabrica) for fabrica in matriz]
     for i, cantidad in enumerate(menorfabricada):
-        print("La fábrica", i + 1, "fabricó la menor cantidad de bicicletas:", cantidad)
+        print("La menor cantidad de bicicletas fabricada por la fabrica", i + 1, "fue de", cantidad, "unidades")
     
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 5
@@ -558,7 +537,7 @@ if ejercicio == 5:
     print("\033[1m--> butacas_libres\033[0m: Recibira como parametro la matriz y retornara cuantas butacas desocupadas hay en la sala.")
     print("\033[1m--> butacas_contiguas\033[0m: Buscara la secuencia mas larga de butacas libres contiguas en una misma fila y devolvera las coordenadas del inicio de la misma.")
     print()
-    time.sleep(0)
+    time.sleep(8)
     
     def mostrar_butacas(matrix): #Basicamente esta funcion imprime la matriz 
         for fila in matrix:
