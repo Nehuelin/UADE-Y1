@@ -1,0 +1,245 @@
+import random 
+import time
+ejercicio = int(input("Que ejercicio queres probar? (NOW TESTING: ): "))
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+#EJERCICIO 1
+
+if ejercicio == 1:
+    print("Desarrollar una funcion que determine si una cadena de caracteres es capicua, sin utilizar cadenas auxiliares ni rebanadas. \nEscribir ademas un programa que permita verificar su funcionamiento.")
+    print()
+    time.sleep(4)
+    
+    def es_capicua(cadena):
+        cadena = cadena.replace(" ", "")
+        longitud = len(cadena)
+        for i in range(longitud // 2):
+            if cadena[i] != cadena[longitud - 1 - i]:
+                return False
+        return True
+    
+    #PROGRAMA PRINCIPAL
+    cad = input("Ingresar cadena de caracteres: ")
+    palindromo = es_capicua(cad)
+    if palindromo:
+        print("Es palindromo")
+    else:
+        print("No es palindromo")
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+#EJERCICIO 2
+
+if ejercicio == 2:
+    print("Leer una cadena de caracteres e imprimirla centrada en pantalla. Suponer que la misma tiene 80 columnas.")
+    print()
+    time.sleep(4)
+
+    def centrar_en_pantalla(cadena):
+        ancho_pantalla = 80
+        espacios = (ancho_pantalla - len(cadena)) // 2
+        cadena_centralizada = ' ' * espacios + cadena
+        print(cadena_centralizada)
+
+    cad = input("Ingrese una cadena: ")
+    centrar_en_pantalla(cad)
+    
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+#EJERCICIO 3
+
+if ejercicio == 3:
+    print('Los numeros de claves de dos cajas fuertes estan intercalados dentro de un numero entero llamado "Clave Maestra", cuya longitud no se conoce. \nRealizar un programa para obtener ambas claves, donde la primera se construye con los digitos ubicados en las posiciones impares de la clave maestra y la segunda con los \ndigitos ubicados en posiciones pares. \nLos digitos se numeran desde la izquierda. Ejemplo: si la clave maestra fuera 18293, la clave 1 seria 123 y la clave 2 seria 89')
+    print()
+    time.sleep(4)
+
+    def obtener_claves(clavetotal):
+        claveimpar = clavetotal[1::2]  # Dígitos en posiciones impares
+        clavepar = clavetotal[::2]   # Dígitos en posiciones pares
+        return claveimpar, clavepar
+
+    clave_maestra = str(random.randint(1,9))
+    for i in range(random.randint(0,9)):
+        clave_maestra += str(random.randint(0,9))
+        
+    print("Clave Maestra:",clave_maestra)
+
+    clave1, clave2 = obtener_claves(clave_maestra)
+
+    print("Clave 1:",clave1)
+    print("Clave 2:",clave2)
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+#EJERCICIO 4
+
+if ejercicio == 4:
+    print("Escribir una funcion que reciba como parametro un numero entero entre 0 y 3999 y lo convierta en un numero romano, devolviendolo en una cadena de caracteres.")
+    print()
+    time.sleep(4)
+
+    def int_a_romano(numero):
+        valores = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        simbolos = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']  # Esto sirve para numeros grandes. Si se reduce el rango, se eliminan las letras mas grandes
+        resultado = ''
+
+        i = 0
+        while numero > 0:
+            while numero >= valores[i]:
+                resultado += simbolos[i]
+                numero -= valores[i]
+            i += 1
+        return resultado
+    
+    #PROGRAMA PRINCIPAL
+    numero_entero = int(input("Ingrese un número entre 0 y 3999: "))
+    if 0 <= numero_entero <= 3999:
+        numero_romano = int_a_romano(numero_entero)
+        print("El número romano correspondiente es:", numero_romano)
+    else:
+        print("El número ingresado está fuera del rango válido.")
+        
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+#EJERCICIO 5
+
+if ejercicio == 5:
+    print("Escribir una funcion filtrar_palabras() que reciba una cadena de caracteres conteniendo una frase y un entero N, y devuelva otra cadena con las palabras que tengan N o mas \ncaracteres de la cadena original. Escribir tambien un programa para verificar el comportamiento de la misma. \nHacer tres versiones de la funcion, para cada uno de los siguientes casos: ")
+    print("a- Utilizando solo ciclos normales.")
+    print("b- Utilizando listas por comprension.")
+    print("c- Utilizando la funcion filter.")
+    print()
+    time.sleep(4)
+    
+    def filtrar_palabras1(cadena, n):
+        lista = cadena.split()
+        nueva = []
+        for i in range(len(lista)):
+            if len(lista[i]) >= n:
+                nueva.append(lista[i])
+        nueva = " / ".join(nueva)
+        return nueva
+    
+    def filtrar_palabras2(cadena, n):
+        lista = cadena.split()
+        nueva = [lista[i] for i in range(len(lista)) if len(lista[i]) >= n]
+        nueva = " / ".join(nueva)
+        return nueva       
+
+    def filtrar_palabras3(cadena, n):
+        lista = cadena.split()
+        nueva = " / ".join(filter(lambda palabra: len(palabra) >= n, lista))
+        return nueva  
+
+    #PROGRAMA PRINCIPAL
+    cad = "Tener confianza en uno mismo, o fingir que la tienes, es necesario para aprovechar las \noportunidades. Es un cliché, pero las oportunidades rara vez vienen servidas en bandeja, \ntienes que ir por ellas."
+    print(cad)
+    n = int(input("Ingresar numero: "))
+    reducido = filtrar_palabras1(cad, n)
+    print(reducido)
+    reducido = filtrar_palabras2(cad, n)
+    print(reducido)
+    reducido = filtrar_palabras3(cad, n)
+    print(reducido)
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+#EJERCICIO 6
+
+if ejercicio == 6:
+    print('Desarrollar una funcion que extraiga una subcadena de una cadena de caracteres, indicando la posicion y la cantidad de caracteres deseada. \nDevolver la subcadena como valor de retorno. Escribir tambien un programa para verificar el comportamiento de la misma. ')
+    print('Ejemplo, dada la cadena "El numero de telefono es 4356-7890" extraer la subcadena que comienza en la posicion 25 y tiene 9 caracteres, resultando la subcadena "4356-7890".')
+    print("Escribir una funcion para cada uno de los siguientes casos: ")
+    print("a- Utilizando rebanadas")
+    print("b- Sin utilizar rebanadas")
+    print()
+    time.sleep(4)
+    
+    def extraer_subcadena1(cadena, pos, cant):
+        sub = cadena[pos : pos + cant]
+        return sub
+    
+    def extraer_subcadena2(cadena, pos, cant):
+        sub = ""
+        for i in range(pos, pos + cant):
+            if i < len(cadena):
+                sub += cadena[i]
+        return sub
+    
+    #PROGRAMA PRINCIPAL
+    cad = "El sol brillaba en el cielo azul mientras las hojas caían lentamente de los árboles en otoño."
+    print(cad)
+    posicion = int(input("Ingresar posicion de inicio: "))
+    cantidad = int(input("Ingresar cantidad de caracteres deseados: "))
+    subcadena = extraer_subcadena1(cad, posicion, cantidad)
+    print(subcadena)
+    subcadena = extraer_subcadena2(cad, posicion, cantidad)
+    print(subcadena)
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+#EJERCICIO 7
+
+if ejercicio == 7:
+    print("Escribir una funcion para eliminar una subcadena de una cadena de caracteres, a partir de una posicion y la cantidad de caracteres dadas, devolviendo la cadena resultante. Escribir tambien un programa para verificar el comportamiento de la misma. \nEscribir una funcion para cada uno de los siguientes casos: ")
+    print("a- Utilizando rebanadas")
+    print("b- Sin utilizar rebanadas")
+    print()
+    time.sleep(4)
+    
+    def eliminar_subcadena1(cadena, pos, cant):
+        inicio = cadena[:pos]
+        fin = cadena[pos + cant:]
+        resultado = inicio + fin
+        return resultado
+
+    def eliminar_subcadena2(cadena, pos, cant):
+        resultado = ""
+        for i in range(len(cadena)):
+            if i < pos or i >= pos + cant:
+                resultado += cadena[i]
+        return resultado
+    
+    #PROGRAMA PRINCIPAL
+    cad = "La música es el lenguaje del alma y puede expresar lo que las palabras a veces no pueden"
+    print(cad)
+    posicion = int(input("Ingresar posicion de inicio: "))
+    cantidad = int(input("Ingresar cantidad de caracteres deseados: "))
+    subcadena = eliminar_subcadena1(cad, posicion, cantidad)
+    print(subcadena)
+    subcadena = eliminar_subcadena2(cad, posicion, cantidad)
+    print(subcadena)
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+#EJERCICIO 8
+
+if ejercicio == 8:
+    print("Escribir una fucnion que reciba como parametro una cadena de caracteres en la que las palabras se encuentran separadas por un o mas espacios. \nDevolver otra cadena con las palabras ordenadas alfabeticamente, dejando un espacio entre cada una.")
+    print()
+    time.sleep(4)
+    
+    def ordenar_cadena_espaciada(cadena):
+        lista = cadena.split(" ")
+        lista.sort()
+        resultado = " ".join(lista)
+        return resultado
+    
+    #PROGRAMA PRINCIPAL
+    cad = "la aventura está en cada rincón del mundo, solo tienes que buscarla"
+    print(cad)
+    ordenada = ordenar_cadena_espaciada(cad)
+    print(ordenada)
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+#EJERCICIO 9
+
+if ejercicio == 9:
+    print("Desarrollar una funcion que devuelva una subcadena con los ultimos N caracteres de una cadena dada. La cadena y el valor de N se pasan como parametros.")
+    print()
+    time.sleep(4)
+    
+    def ultimos_caracteres(cadena, numero):
+        sub = cadena[len(cadena)-numero:]
+        return sub
+    
+    #PROGRAMA PRINCIPAL
+    cad = '"El conocimiento es el tesoro más valioso, y la sabiduría es la llave que lo desbloquea"'
+    print(cad)
+    n = int(input("Ingresar la ultima cantidad de caracteres deseadas: "))
+    subcadena = ultimos_caracteres(cad, n)
+    print(subcadena)
