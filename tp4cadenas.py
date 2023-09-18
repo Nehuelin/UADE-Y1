@@ -351,7 +351,38 @@ if ejercicio == 14:
     print("")
     print()
     time.sleep(0)  
-      
+    
+    def admitir_correo(email):
+        veces = email.count("@")
+        if veces > 1:
+            return False
+        arroba = email.find("@")
+        usuario = email[:arroba]
+        if not usuario.isalnum():
+            return False
+        finald = email.find(".")
+        if finald ==  -1:
+            return False
+        dominio = email[arroba:finald-1]
+        if len(dominio) < 1:
+            return False
+        dotdot = email[finald:]
+        if dotdot != ".com.ar":
+            return False
+        return True
+    #PROGRAMA PRINCIPAL
+    mail = input("Ingresar correo electronico: ")
+    listaemail = []
+    while mail != "":
+        validacion = admitir_correo(mail)
+        if validacion:
+            print("Omegalul")
+            if mail not in listaemail:
+                listaemail.append(mail)
+        else:
+            print("Email trucho")
+        mail = input("Ingresar correo electronico: ")
+    print(listaemail)      
     
     
     
