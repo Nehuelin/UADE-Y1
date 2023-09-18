@@ -1,6 +1,6 @@
 import random 
 import time
-ejercicio = int(input("Que ejercicio queres probar? (NOW TESTING: ): "))
+ejercicio = int(input("Que ejercicio queres probar? (NOW TESTING: 13): "))
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 1
@@ -108,28 +108,28 @@ if ejercicio == 5:
     print()
     time.sleep(4)
     
-    def filtrar_palabras1(cadena, n):
+    def filtrar_palabras1(cadena, numero):
         lista = cadena.split()
         nueva = []
         for i in range(len(lista)):
-            if len(lista[i]) >= n:
+            if len(lista[i]) >= numero:
                 nueva.append(lista[i])
         nueva = " / ".join(nueva)
         return nueva
     
-    def filtrar_palabras2(cadena, n):
+    def filtrar_palabras2(cadena, numero):
         lista = cadena.split()
-        nueva = [lista[i] for i in range(len(lista)) if len(lista[i]) >= n]
+        nueva = [lista[i] for i in range(len(lista)) if len(lista[i]) >= numero]
         nueva = " / ".join(nueva)
         return nueva       
 
-    def filtrar_palabras3(cadena, n):
+    def filtrar_palabras3(cadena, numero):
         lista = cadena.split()
-        nueva = " / ".join(filter(lambda palabra: len(palabra) >= n, lista))
+        nueva = " / ".join(filter(lambda palabra: len(palabra) >= numero, lista)) #palabra es cada elemento de la lista: si palabra es mayor o igual que numero, se agrega a nueva.
         return nueva  
 
     #PROGRAMA PRINCIPAL
-    cad = "Tener confianza en uno mismo, o fingir que la tienes, es necesario para aprovechar las \noportunidades. Es un cliché, pero las oportunidades rara vez vienen servidas en bandeja, \ntienes que ir por ellas."
+    cad = "Tener confianza en uno mismo, o fingir que la tienes, es necesario para aprovechar las oportunidades. Es un cliché, pero las oportunidades rara vez vienen servidas en bandeja, tienes que ir por ellas."
     print(cad)
     n = int(input("Ingresar numero: "))
     reducido = filtrar_palabras1(cad, n)
@@ -165,7 +165,7 @@ if ejercicio == 6:
     #PROGRAMA PRINCIPAL
     cad = "El sol brillaba en el cielo azul mientras las hojas caían lentamente de los árboles en otoño."
     print(cad)
-    posicion = int(input("Ingresar posicion de inicio: "))
+    posicion = int(input("Ingresar posicion de inicio (base 0): "))
     cantidad = int(input("Ingresar cantidad de caracteres deseados: "))
     subcadena = extraer_subcadena1(cad, posicion, cantidad)
     print(subcadena)
@@ -243,3 +243,113 @@ if ejercicio == 9:
     n = int(input("Ingresar la ultima cantidad de caracteres deseadas: "))
     subcadena = ultimos_caracteres(cad, n)
     print(subcadena)
+    
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+#EJERCICIO 10
+
+if ejercicio == 10:
+    print("Desarrollar una funcion para reemplazar todas las apariciones de una palabra por otra en una cadena de caracteres y devolver la cadena obtenida y un entero con la cantidad de \nreemplazos realizados. \nTener en cuenta que solo deben reemplazarse palabras completas, y no fragmentos de palabras. \nEscribir tambien un programa para verificar el comportamiento de la funcion.")
+    print()
+    time.sleep(4)    
+    
+    def reemplazar(cadena):
+        palabra = 'la'
+        reemplazo = 'oso' 
+        cantidad = 0 # Crear las variables parametro. Dividimos la cadena e investigamos con bucle para encontrar las palabras a reemplazar.
+        lista = cadena.split() 
+        for i in range(len(lista)):
+            if lista[i] == palabra:
+                lista[i] = reemplazo #Si la palabra de la cadena coincide con el parametro, la cambiamos por la nueva, y sumamos 1 al contador
+                cantidad += 1
+        nueva = ' '.join(lista) # Finalizamos y volvemos a unir la cadena
+        return nueva, cantidad
+    
+    #PROGRAMA PRINCIPAL
+    cad1 = '''La complejidad del universo se manifiesta en la interconexión de innumerables fenómenos y la intrincada danza de partículas elementales que conforman la materia, 
+mientras que la mente humana, dotada de la capacidad de indagar en los misterios de la naturaleza, 
+continúa explorando los límites del conocimiento y la comprensión en su eterna búsqueda de respuestas y significado'''
+    print(cad1)
+    
+    cad2, n = reemplazar(cad1)
+    print(cad2)
+    print(f"\nSe reemplazaron {n} palabras")
+    
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+#EJERCICIO 11
+
+if ejercicio == 11:
+    print("Escribir un programa que cuente cuantas veces se encuentra una subcadena dentro de otra cadena, sin diferenciar mayusculas y minusculas. \nTener en cuenta que los caracteres de la subcadena no necesariamente deben estar en forma consecutiva dentro de la cadena, pero si respetando el orden de los mismos.")
+    print()
+    time.sleep(4) 
+    
+    def encontrar_subcadena(cadena, subcadena):
+        cadena = cadena.lower()
+        subcadena = subcadena.lower()   # Uso .lower() para no diferenciar Mayus y Minus
+        contador = 0
+        inicio = 0
+        while inicio < len(cadena):
+            posicion = cadena.find(subcadena[0], inicio) #BUCLE: 
+            if posicion == -1:
+                break
+            encontrado = True
+            for i in range(1, len(subcadena)):
+                siguiente_caracter = cadena.find(subcadena[i], posicion + 1)
+                if siguiente_caracter == -1:
+                    encontrado = False
+                    break
+                posicion = siguiente_caracter
+            if encontrado:
+                contador += 1
+            inicio = posicion + 1
+        return contador
+                
+    #PROGRAMA PRINCIPAL
+    cad1 = "El viaje hacia el conocimiento es un camino lleno de desafíos y descubrimientos que nos enriquecen y nos ayudan a crecer como seres humanos"
+    print(cad1)
+    sub = input("Ingresar subcadena a encontrar: ")
+    cant = encontrar_subcadena(cad1, sub)    
+    print(f"La subcadena '{sub}' se encontro {cant} veces")
+    
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+#EJERCICIO 12
+
+if ejercicio == 12:
+    print("")
+    print()
+    time.sleep(0)    
+        
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+#EJERCICIO 13
+
+if ejercicio == 13:
+    print("Muchas aplicaciones financieras requieren que los numeros sean expresados tambien en letras. \nPor ejemplo, el numero 2153 puede escribirse como 'dos mil ciento cincuenta y tres'. ")
+    print("Escribir un programa que utilice una funcion para convertir un numero entero entre 0 y 1.000.000.000.000 (un billon) a letras.")
+    print()
+    time.sleep(0)    
+
+    def convertir_a_letras(numero):
+        pass    
+        
+        
+    
+    #PROGRAMA PRINCIPAL
+    n = int(input("Ingresar numero: "))
+    expresion = convertir_a_letras(str(n))
+    
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+#EJERCICIO 14
+
+if ejercicio == 14:
+    print("")
+    print()
+    time.sleep(0)  
+      
+    
+    
+    
+    
+    
+    
+    
+    
+##   
