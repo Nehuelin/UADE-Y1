@@ -317,7 +317,15 @@ if ejercicio == 12:
     print("")
     print()
     time.sleep(0)    
-        
+    
+    tipos = ["Oros", "Espadas", "Bastos", "Copas"]
+    lista = []
+    j = 0
+    while j < 4:
+        lista += [str(i) + " " + tipos[j] for i in range(1, 13)]
+        j += 1
+    print(lista)        
+    
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 13
 
