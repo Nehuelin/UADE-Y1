@@ -33,24 +33,25 @@ try:
 
                 if producto in stock:
                     stock[producto] -= cantidad
+
+    # Ordena el stock en orden descendente por cantidad
+    stock_ordenado = sorted(stock.items(), key=lambda x: x[1], reverse=True)
+    
+    # Imprime el listado ordenado
+    print("Listado de stock por producto:")
+    for producto, cantidad in stock_ordenado:
+        print(f"{producto}: {cantidad}")
+    
+    # Calcula el resultado del ejercicio para el año 2009
+    resultado_ejercicio_2009 = total_ventas_2009 - total_compras_2009
+    print("\nResultado del ejercicio para el año 2009:")
+    print(f"Total de ventas 2009: {total_ventas_2009}")
+    print(f"Total de compras 2009: {total_compras_2009}")
+    print(f"Resultado para el año 2009: {resultado_ejercicio_2009}")
 except (FileNotFoundError, OSError):
     print("LMAO")
-
-# Ordena el stock en orden descendente por cantidad
-stock_ordenado = sorted(stock.items(), key=lambda x: x[1], reverse=True)
-
-# Imprime el listado ordenado
-print("Listado de stock por producto:")
-for producto, cantidad in stock_ordenado:
-    print(f"{producto}: {cantidad}")
-
-# Calcula el resultado del ejercicio para el año 2009
-resultado_ejercicio_2009 = total_ventas_2009 - total_compras_2009
-print("\nResultado del ejercicio para el año 2009:")
-print(f"Total de ventas 2009: {total_ventas_2009}")
-print(f"Total de compras 2009: {total_compras_2009}")
-print(f"Resultado para el año 2009: {resultado_ejercicio_2009}")
-
+finally:
+    archivo.close()
 
 # COPIAR EN EL ARCHIVO DE TEXTO PARA PROBAR --> 
 # Compra de mercaderías 01 02 2009 RESMA PAPEL OBRA 70G 50 101.15
