@@ -12,6 +12,25 @@ if ejercicio == 1:
     print("Desarrollar una funcion para ingresar a traves del teclado un numero natural. \nLa funcion rechazara cualquier ingreso invalido de datos utilizando excepciones y mostrara la razon exacta del error. \nControlar que se ingrese un numero, que ese numero sea entero y que sea mayor que 0. \nDevolver el valor ingresado cuando este sea el correcto. Escribir tambien un programa que permita probar el correcto funcionamiento de la misma.")
     print()
     time.sleep(0)
+    
+    def ingresarnumero():
+        while True:
+            try:
+                numero = input("Ingresar numero natural positivo: ")
+                for digitos in numero:
+                    assert digitos != ".", "El numero no es entero"
+                assert int(numero) > 0, "El numero no es mayor que 0"
+            except ValueError:
+                print("No se ingresó un numero")
+            except AssertionError as mensaje:
+                print(mensaje)
+            else:
+                return True
+    
+    # Programa Principal
+    valor = 0
+    valor = ingresarnumero()
+    print("El valor cumple las condiciones ")
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 2
@@ -42,7 +61,22 @@ if ejercicio == 3:
     print('Desarrollar una funcion que devuelva una cadena de caracteres con el nombre del mes cuyo numero se recibe como parametro. \nLos nombres de los meses deberan obtenerse de una lista de cadenas de caracteres inicializada dentro de la funcion. \nDevolver una cadena vacia si el numero de mes es invalido. La deteccion de meses invalidos debera realizarse a traves de excepciones.')
     print()
     time.sleep(0)
-
+    
+    def nombremes(numero):
+        lista = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+        try:
+            assert 0 < numero < 13
+        except AssertionError:
+            print("Numero de mes invalido")
+            return -1
+        else:
+            nombre = lista[numero-1]
+            return nombre
+        
+    # Programa Principal
+    num = int(input("Ingresar numero de mes: "))
+    mes = nombremes(num)    
+    print(mes)
     
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 4
