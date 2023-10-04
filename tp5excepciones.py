@@ -25,12 +25,11 @@ if ejercicio == 1:
             except AssertionError as mensaje:
                 print(mensaje)
             else:
-                return True
+                return numero
     
     # Programa Principal
-    valor = 0
     valor = ingresarnumero()
-    print("El valor cumple las condiciones ")
+    print(f"El numero {valor} cumple con las condiciones ")
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 2
