@@ -67,7 +67,7 @@ if ejercicio == 3:
             assert 0 < numero < 13
         except AssertionError:
             print("Numero de mes invalido")
-            return -1
+            return ""
         else:
             nombre = lista[numero-1]
             return nombre
