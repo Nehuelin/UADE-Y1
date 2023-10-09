@@ -128,6 +128,59 @@ if ejercicio == 3:
     print("\033[1m--> MostrarMasAltos()\033[0m: Muestra por pantalla las disciplinas deportivas cuyos atletas superan la estatura promedio general. Obtener los datos del segundo archivo.")
     print()
     time.sleep(0)
+    # Work in progress
+    def grabarrangoalturas():
+        try:
+            arch1 = open("alturas.txt", "wt")
+            deporte = input("Ingresar Disciplina: ")
+            while deporte != "":
+                assert deporte.isalpha(), "Nombre invalido"
+                arch1.write(deporte + "\n")
+                altura = float(input("Ingresar altura del atleta: "))
+                while altura != -1:
+                    arch1.write(str(altura) + "\n")
+                    altura = float(input("Ingresar altura del atleta: "))
+                deporte = input("Ingresar Disciplina: ")
+        except FileNotFoundError as mensaje:
+            print(mensaje)
+        except OSError as mensaje:
+            print(mensaje)
+        except AssertionError as mensaje:
+            print(mensaje)
+        finally:
+            try:
+                arch1.close()
+            except NameError:
+                pass
+                    
+    def grabarpromedio():
+        try:
+            arch1 = open("alturas.txt", "rt")
+            arch2 = open("promedio.txt", "wt")
+            for linea in arch1:
+                linea = linea.rstrip("\n")
+                if linea.isalpha():
+                    arch2.write(linea + "\n")
+                else:
+                    pass
+                    
+        except FileNotFoundError as mensaje:
+            print(mensaje)
+        except OSError as mensaje:
+            print(mensaje)
+        finally:
+            try:
+                arch1.close()
+                arch2.close()
+            except NameError:
+                pass    
+    
+    def mostrarmasaltos():
+        pass
+    
+    # Programa Principal
+    grabarrangoalturas()
+    grabarpromedio()    
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 4
