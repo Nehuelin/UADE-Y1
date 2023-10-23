@@ -13,33 +13,70 @@ if ejercicio == 1:
     time.sleep(0)
 
     try:
-        arch = open("datos.txt", "rt")
-        salida = open("limpio.txt", "wt")
+        entrada = open("datos.txt", "rt")
+        salida = open("nuevo.txt", "wt")
+        dentro_de_comentario = False  # Para rastrear si estamos dentro de un comentariog
+
+        for linea in entrada:
+            linea_sin_comentarios = ""
+            i = 0
+            longitud_linea = len(linea)
+            while i < longitud_linea:
+                if (not dentro_de_comentario and linea[i] == '#') or (not dentro_de_comentario and linea[i:i+3] == '"""'):
+                    # Si encontramos un '#' y no estamos dentro de un comentario o docstring, ignoramos el resto de la línea
+                    break
+                elif linea[i] == '"':
+                    # Si encontramos una comilla doble
+                    linea_sin_comentarios += linea[i]
+                    i += 1
+                elif not dentro_de_comentario and linea[i] == "'":
+                    # Si encontramos una comilla simple, avanzamos hasta la siguiente comilla simple
+                    linea_sin_comentarios += linea[i]
+                    i += 1
+                    while i < longitud_linea and linea[i] != "'":
+                        linea_sin_comentarios += linea[i]
+                        i += 1
+                    if i < longitud_linea:
+                        linea_sin_comentarios += linea[i]
+                        i += 1
+                else:
+                    # Copiamos el carácter normalmente
+                    linea_sin_comentarios += linea[i]
+                    i += 1
+            
+            renglon = linea_sin_comentarios.rfind('\n')
+            if len(linea_sin_comentarios) > 0 and renglon == -1:
+                linea_sin_comentarios += '\n'
+                
+            salida.write(linea_sin_comentarios)
+
+        print(f'Comentarios y docstrings eliminados correctamente. Revisar archivo "nuevo.txt"')
     except FileNotFoundError as mensaje:
         print("No se pudo abrir el archivo:", mensaje)
+        
+        
     finally:
         try: 
             entrada.close()
             salida.close()
         except NameError:
             pass
-        
 
 # vvvvv COPIAR EN BLOCK DE NOTAS vvvvv      
 # def calcular_area_triangulo(base, altura):
-# """ Esta función calcula el área de un triángulo dado su base y altura. """
-# area = (base * altura) / 2
-# return area
+#     """ Esta función calcula el área de un triángulo dado su base y altura. """
+#     area = (base * altura) / 2
+#     return area
 
 # # Solicitar al usuario la entrada de base y altura
-# base = float(input("Ingrese la longitud de la base del triángulo: "))
+# base = float(input("Ingrese la longitud de la base del triángulo: ")) # Solicitar al usuario la entrada de base y altura 
 # altura = float(input("Ingrese la altura del triángulo: "))
 
 # # Calcular el área del triángulo usando la función
 # area_del_triangulo = calcular_area_triangulo(base, altura)
 
 # # Mostrar el resultado
-# print(f"El área del triángulo con base {base} y altura {altura} es: {area_del_triangulo}")
+# print(f"El área del triángulo con base {base} y altura {altura} es: {area_del_triangulo}. ' # test' ")
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 2
@@ -48,7 +85,7 @@ if ejercicio == 2:
     print("Escribir un programa que permita grabar en un archivo los datos de lluvia caida durante un año. Cada linea del archivo se grabara con el siguiente formato: \n<dia>;<mes>;<lluvia caida en mm> por ejemplo 25;5;319.")
     print("Los datos se generaran mediante numeros al azar, asegurandose que las fechas sean validas. La cantidad de registros tambien sera un numero al azar entre 50 y 200. \nPor ultimo se solicita leer el archivo generado e imprimir un informe en formato matricial donde cada columna representa a un mes y cada fila corresponda a los dias del mes.\nImprimir ademas el total de lluvia caida en todo el año.")
     print()
-    time.sleep(0)
+    time.sleep(16)
     
         #YEARS >= 1582, BISIESTO SI ES DIVISIBLE POR 4. PARA LOS años QUE SON DIVISIBLES POR 4 y 100, SI NO SON DIVISIBLES POR 400, NO SON BISIESTOS
         #MONTHS/DAYS: FEB --> 28d, 29d (BISIESTO); JAN, MAR, MAY, JUL, AUG, OCT, DEC --> 31d; FEB, APR, JUN, SEP, NOV --> 30d
@@ -89,9 +126,7 @@ if ejercicio == 2:
     
     try:
         arch = open("registrolluvia.txt", "rt")
-        columnas = 12
-        filas = 31
-        matriz = [[0]*columnas for i in range(filas)]
+        matriz = [[0] * 12 for i in range(31)] # 12 Meses, 31 Dias x Mes
         anual = 0
         for linea in arch:
             linea = linea.rstrip('\n')
@@ -128,19 +163,21 @@ if ejercicio == 3:
     print("\033[1m--> MostrarMasAltos()\033[0m: Muestra por pantalla las disciplinas deportivas cuyos atletas superan la estatura promedio general. Obtener los datos del segundo archivo.")
     print()
     time.sleep(0)
-    # Work in progress
+
     def grabarrangoalturas():
         try:
             arch1 = open("alturas.txt", "wt")
-            deporte = input("Ingresar Disciplina: ")
+            deporte = input("Ingresar Disciplina (Enter para terminar): ")
             while deporte != "":
                 assert deporte.isalpha(), "Nombre invalido"
                 arch1.write(deporte + "\n")
-                altura = float(input("Ingresar altura del atleta: "))
+                altura = float(input("Ingresar altura del atleta (-1 para terminar): "))
                 while altura != -1:
                     arch1.write(str(altura) + "\n")
-                    altura = float(input("Ingresar altura del atleta: "))
-                deporte = input("Ingresar Disciplina: ")
+                    altura = float(input("Ingresar altura del atleta (-1 para terminar): "))
+                deporte = input("Ingresar Disciplina (Enter para terminar): ")
+            else:
+                arch1.write("...")
         except FileNotFoundError as mensaje:
             print(mensaje)
         except OSError as mensaje:
@@ -154,15 +191,27 @@ if ejercicio == 3:
                 pass
                     
     def grabarpromedio():
+        skip = True
+        suma = 0
+        cantidad = 0        
         try:
             arch1 = open("alturas.txt", "rt")
             arch2 = open("promedio.txt", "wt")
             for linea in arch1:
                 linea = linea.rstrip("\n")
-                if linea.isalpha():
-                    arch2.write(linea + "\n")
+                if skip == True:
+                    arch2.write(linea + '\n')
+                    skip = False  
+                elif linea.isalpha() or linea == "...":
+                    promedio = suma / cantidad
+                    arch2.write(f"{promedio}" + '\n')
+                    if linea != "...":
+                        arch2.write(linea + "\n")
+                    suma = 0
+                    cantidad = 0
                 else:
-                    pass
+                    suma += float(linea)
+                    cantidad += 1
                     
         except FileNotFoundError as mensaje:
             print(mensaje)
@@ -176,12 +225,40 @@ if ejercicio == 3:
                 pass    
     
     def mostrarmasaltos():
-        pass
+        suma = 0
+        cantidad = 0
+        try:
+            arch2 = open("promedio.txt", "rt")
+            for linea in arch2:
+                linea = linea.rstrip('\n')
+                if not linea.isalpha():
+                    suma += float(linea)
+                    cantidad += 1
+            promedio = suma / cantidad
+            print(f"El promedio general es de {promedio}m")
+            arch2.seek(0)
+            for linea in arch2:
+                linea = linea.rstrip('\n')
+                if linea.isalpha():
+                    deporte = linea
+                else:
+                    if float(linea) > promedio:
+                        print(f"La disciplina {deporte} supera el promedio general.")
+                                                
+        except FileNotFoundError as mensaje:
+            print(mensaje)
+        except OSError as mensaje:
+            print(mensaje)
+        finally:
+            try:
+                arch2.close()
+            except NameError:
+                pass            
     
     # Programa Principal
     grabarrangoalturas()
     grabarpromedio()    
-
+    mostrarmasaltos()
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 4
 
@@ -199,11 +276,11 @@ if ejercicio == 4:
         for linea in arch:
             apellido, nombre = linea.split(", ")
             if apellido.rfind("ian") != -1:
-                armenia.write(nombre + '\n')
+                armenia.write(nombre)
             elif apellido.rfind("ini") != -1:
-                italia.write(nombre + '\n')
+                italia.write(nombre)
             elif apellido.rfind("ez") != -1:
-                españa.write(nombre + '\n')
+                españa.write(nombre)
     except FileNotFoundError as mensaje:
         print("Error: No se pudo abrir el archivo:", mensaje)
     except OSError as mensaje:
@@ -216,7 +293,7 @@ if ejercicio == 4:
             españa.close()
         except NameError:
             pass
-        print("Programa cerrado")
+        print("Archivo cerrado")
 
 # vvvvv COPIAR EN BLOCK DE NOTAS vvvvv
 # Rodriguez, Juan
