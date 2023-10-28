@@ -114,6 +114,7 @@ print(f"\nDEV ONLY! Cantidad de registros: {sum(dev_total_lines)}")
 # OBSERVACIONES:
 # La cantidad de registros a generar afectan la velocidad de ejecucion
 # El diccionario listado_agencias funciona, pero no se va a notar al menos que el rango de agencias generadas sea entre pocos numeros
+# UN APOSTADOR PUEDE PARTICIPAR CON VARIAS AGENCIAS!!!!
 
 # SUGERENCIAS
 # Podriamos aplicar recursividad en alguna funcion u operacion basica
