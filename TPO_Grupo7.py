@@ -8,6 +8,16 @@ def generar_numeros(): # <-- Podriamos aplicar recursividad aca?
         _numeros.add(random.randint(0, 41))
     return list(_numeros)
 
+# def generar_numeros(unicos, cantidad):
+#     if cantidad == 0:
+#         return list(unicos)  # Cuando se alcanza la cantidad deseada, convertimos el conjunto en una lista y lo devolvemos.
+#     else:
+#         nuevo_numero = random.randint(0, 41)
+#         while nuevo_numero in unicos:  # Asegurarse de que el número generado sea único.
+#             nuevo_numero = random.randint(0, 41)
+#         unicos.add(nuevo_numero)
+#         return generar_numeros(unicos, cantidad - 1)
+
 def generar_archivo(): # <-- La cantidad de registros afecta la velocidad de ejecucion (Cuantos mas registros tenga que hacer, mas va a tardar)
     registros = random.randint(10000, 50000)
     
