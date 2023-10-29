@@ -275,11 +275,11 @@ if ejercicio == 4:
         españa = open("ESPAÑA.TXT", "wt")
         for linea in arch:
             apellido, nombre = linea.split(", ")
-            if apellido.rfind("ian") != -1:
+            if apellido[-3:] == "ian":
                 armenia.write(nombre)
-            elif apellido.rfind("ini") != -1:
+            elif apellido[-3:] == "ini":
                 italia.write(nombre)
-            elif apellido.rfind("ez") != -1:
+            elif apellido[-2:] == "ez":
                 españa.write(nombre)
     except FileNotFoundError as mensaje:
         print("Error: No se pudo abrir el archivo:", mensaje)
