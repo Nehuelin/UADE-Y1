@@ -10,10 +10,26 @@ if ejercicio == 1:
     print("Desarrollar las siguientes funciones utilizando tuplas para representar fechas y horarios, y luego escribir un programa para verificar su comportamiento:")
     print("a. Ingresar una fecha desde el teclado, verificando que corresponda a una fecha valida")
     print("b. Sumar N dias a la fecha")
-    print("c. Ingrear un horario desde el teclado, verificando que sea correcto")
+    print("c. Ingresar un horario desde el teclado, verificando que sea correcto")
     print("d. Calcular la diferencia entre dos horarios. Si el primer horario fuera mayor al segundo se considerara que el primero corresponde al dia anterior. En ningun caso la diferencia puede superar las 24 horas.")
     print()
     time.sleep(0)   
+
+    def ingresar_fecha():
+        dia = int(input("Ingresar dia: "))
+        mes = int(input("Ingresar mes: "))
+        año = int(input("Ingresar año: "))
+    
+    def sumar_dias():
+        ...
+    
+    def ingresar_horario():
+        hora = int(input("Ingresar hora: "))
+        minuto = int(input("Ingresar minuto: "))
+        segundo = int(input("Ingresar segundos: "))
+    
+    def diferencia_horarios():
+        ...
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 2
@@ -24,6 +40,8 @@ if ejercicio == 2:
     print()
     time.sleep(0)   
 
+    
+
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 3
 
@@ -31,6 +49,18 @@ if ejercicio == 3:
     print("Desarrollar un programa que utilice una funcion que reciba como parametro una cadena de caracteres conteniendo una direccion de correo electronico y devuelva una tupla con las distintas partes que componen dicha direccion. ")
     print("Ejemplo: alguien@uade.edu.ar -> (alguien, uade, edu, ar)")
     time.sleep(0)   
+
+    def componentes_mail(_email):
+        _usuario = _email.lstrip("@")
+        resto = _email.rstrip("@")
+        resto = resto[0].split(".")
+        _partes = _usuario + resto
+        return tuple(_partes)
+    
+    # PROGRAMA PRINCIPAL
+    email = input("Ingresar email: ")
+    partes = componentes_mail(email)
+    print(partes)
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 4
