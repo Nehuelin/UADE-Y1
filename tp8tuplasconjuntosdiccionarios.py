@@ -158,6 +158,22 @@ if ejercicio == 7:
     print()
     time.sleep(0)   
 
+    conjunto = {random.randint(0,9) for x in range(random.randint(1,10))}
+    print(conjunto)
+
+    while True:
+        try: 
+            valor = int(input("Ingresar valor a eliminar: "))
+            while valor != -1:
+                conjunto.remove(valor)
+                print(conjunto)
+                valor = int(input("Ingresar valor a eliminar: "))
+            break
+        except ValueError:
+            print("Dato invalido")
+        except KeyError:
+            print("Valor no encontrado")
+
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 8
 
@@ -166,13 +182,25 @@ if ejercicio == 8:
     print()
     time.sleep(0)   
 
+    diccionario = {x: x**2 for x in range(1, 21)}
+    print(diccionario)
+
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 9
 
 if ejercicio == 9:
-    print("Escribir una funcion que reciba un numero entero N y devuelva un diccionario con la tabal de multiplicar de N del 1 al 12. Escribir tambien un programa para probar la funcion.")
+    print("Escribir una funcion que reciba un numero entero N y devuelva un diccionario con la tabla de multiplicar de N del 1 al 12. Escribir tambien un programa para probar la funcion.")
     print()
     time.sleep(0)   
+
+    def tabla_multiplicacion(_numero):
+        _diccionario = {x: x * _numero for x in range(1, 13)}
+        return _diccionario
+    
+    # Programa Principal
+    numero = int(input("Ingresar numero entero: "))
+    diccionario = tabla_multiplicacion(numero)
+    print(diccionario)
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 10
@@ -182,6 +210,33 @@ if ejercicio == 10:
     print()
     time.sleep(0)   
 
+    def eliminarclaves(_diccionario, _lista_claves):
+        try:
+            for i in range(len(_lista_claves)):
+                _eliminado = _diccionario.pop(lista_claves[i])
+        except KeyError:
+            return _diccionario, False
+        else:
+            return _diccionario, True
+                
+    
+    # Programa Principal
+    diccionario = {x: x**2 for x in range(1, 21)}
+    lista_claves = []
+    print(diccionario)
+
+    clave = int(input("Ingresar clave a eliminar (-1 para terminar): "))
+    while clave != -1:
+        lista_claves.append(clave)
+        clave = int(input("Ingresar clave a eliminar (-1 para terminar): "))
+
+    diccionario, operacion_exitosa = eliminarclaves(diccionario, lista_claves)
+    print(diccionario)
+    if operacion_exitosa:
+        print("Claves eliminadas con exito.")
+    else:
+        print("Error en la Operacion.")
+
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 11
 
@@ -189,6 +244,28 @@ if ejercicio == 11:
     print('Crear una funcion contarvocales(), que reciba una palabra y cuentes cuantas letras "a" contiene, cuantas "e", cuantas "i", etc. Devolver un diccionario con los resultados.\nDesarrollar un programa para leer una frase e invocar a la funcion por cada palabra que contenga la misma. \nImprimir cada palabra y la cantidad de vocales hallada.')
     print()
     time.sleep(0)   
+
+    def contarvocales(_palabra):
+        _diccionario = {}
+        _palabra = _palabra.lower().strip(',').strip('.').strip(';')
+        _cantidad_a = _palabra.count('a')
+        _cantidad_e = _palabra.count('e')
+        _cantidad_i = _palabra.count('i')
+        _cantidad_o = _palabra.count('o')
+        _cantidad_u = _palabra.count('u')
+        _diccionario['a'] = _cantidad_a
+        _diccionario['e'] = _cantidad_e
+        _diccionario['i'] = _cantidad_i
+        _diccionario['o'] = _cantidad_o
+        _diccionario['u'] = _cantidad_u
+        return _diccionario
+
+    # Programa Principal
+    frase = input("Ingresar frase: ")
+    palabras = frase.split()
+    for palabra in palabras:
+        diccionario = contarvocales(palabra)
+        print(f"{palabra}:", diccionario)
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 12
@@ -198,6 +275,20 @@ if ejercicio == 12:
     print()
     time.sleep(0)   
 
+    diccionario = {}
+    while True:
+        try:
+            producto = input("Ingresar nombre del producto (Vacio para terminar): ")
+            while producto != "":
+                precio = float(input("Ingrese precio del producto: "))
+                diccionario[producto] = precio
+                producto = input("Ingresar nombre del producto (Vacio para terminar): ")
+            else:
+                break
+        except ValueError:
+            print("Datos invalidos")
+    
+    print(diccionario)
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 13
 
