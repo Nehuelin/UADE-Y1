@@ -51,10 +51,10 @@ if ejercicio == 3:
     time.sleep(0)   
 
     def componentes_mail(_email):
-        _usuario = _email.lstrip("@")
-        resto = _email.rstrip("@")
-        resto = resto[0].split(".")
-        _partes = _usuario + resto
+        _resto = _email.split(".")
+        _usuario = _resto[0].split("@")
+        _descarte = _resto.pop(0)
+        _partes = [_usuario + _resto]
         return tuple(_partes)
     
     # PROGRAMA PRINCIPAL
@@ -69,6 +69,37 @@ if ejercicio == 4:
     print("Escribir una funcion que indique si dos fichas de domino encajan o no. Las fichas son recibidas en dos tuplas, por ejemplo: (3, 4) y (5, 4). \nLa funcion devuelve True o False. Escribir tambien un programa para verificar su comportamiento.")
     time.sleep(0)   
 
+    def encajan_fichas(_ficha1, _ficha2):
+        if _ficha1[0] in _ficha2 or _ficha1[1] in _ficha2:
+            return True
+        else:
+            return False
+
+    # Programa Principal
+    try:
+        numero1 = int(input("Ingresar numero entre 1 y 6: "))
+        assert numero1 > 0 and numero1 < 7
+        numero2 = int(input("Ingresar segundo numero entre 1 y 6: "))
+        assert numero2 > 0 and numero2 < 7
+        ficha1 = numero1, numero2
+        print(f"FICHA 1: {ficha1}")
+        numero1 = int(input("Ingresar numero entre 1 y 6: "))
+        assert numero1 > 0 and numero1 < 7
+        numero2 = int(input("Ingresar segundo numero entre 1 y 6: "))
+        assert numero2 > 0 and numero2 < 7
+        ficha2 = numero1, numero2
+        print(f"FICHA 2: {ficha2}")
+    except AssertionError as mensaje:
+        print("Numero fuera de rango.")
+    except ValueError:
+        print("Valor invalido.")
+    else: 
+        encajan = encajan_fichas(ficha1, ficha2)
+        if encajan:
+            print("Las fichas encajan.")
+        else:
+            print("Las fichas NO encajan.")
+
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 5
 
@@ -81,6 +112,29 @@ if ejercicio == 5:
     print()
     time.sleep(0)   
 
+    def vectores_ortogonales(_vector1, _vector2):
+        resultado = (_vector1[0] * vector2[0]) + (_vector1[1] * vector2[1])
+        return True if resultado == 0 else False
+    
+    # Programa Principal
+    try:
+        numero1 = int(input("Ingresar coordenada x: "))
+        numero2 = int(input("Ingresar coordenada y: "))
+        vector1 = numero1, numero2
+        print(f"VECTOR 1: {vector1}")
+        numero1 = int(input("Ingresar coordenada x: "))
+        numero2 = int(input("Ingresar coordenada y: "))
+        vector2 = numero1, numero2
+        print(f"VECTOR 2: {vector2}")
+    except ValueError:
+        print("Valor invalido.")
+    else: 
+        ortogonales = vectores_ortogonales(vector1, vector2)
+        if ortogonales:
+            print("Los vectores son ortogonales")
+        else:
+            print("Los vectores NO son ortogonales")
+
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 6
 
@@ -88,6 +142,13 @@ if ejercicio == 6:
     print("Ingresar una frase desde el teclado y usar un conjunto para eliminar las palabras repetidas, dejando un solo ejemplar de cada una. Finalemnte mostrar las palabras ordenadas segun su longitud.")
     print()
     time.sleep(0)   
+
+    frase = input("Ingresar frase: ")
+    sin_repetidos = {palabras.lower().rstrip(",") for palabras in frase.split()}
+    ordenados = sorted(sin_repetidos)
+    for i in range(len(ordenados)):
+        longitud = len(ordenados[i])
+        print(ordenados[i], longitud)
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 7
@@ -144,6 +205,3 @@ if ejercicio == 13:
     print('Escribir una funcion buscarclave() que reciba como parametros un diccionario y un valor, y devuelva una lista de claves que apunten ("mapeen") a ese valor en el diccionario. \nComprobar el comportamiento de la funcion medianto un programa apropiado.')
     print()
     time.sleep(0)   
-
-    
-    
