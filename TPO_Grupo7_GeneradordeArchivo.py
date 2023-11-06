@@ -7,6 +7,7 @@ def generar_numeros():
         _numeros.add(random.randint(0, 41))
     return list(_numeros)
 
+# Programa Principal
 inicio = time.time()  
 registros = random.randint(10000, 50000)
 
