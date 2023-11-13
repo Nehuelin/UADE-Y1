@@ -50,18 +50,16 @@ if ejercicio == 3:
     print("Ejemplo: alguien@uade.edu.ar -> (alguien, uade, edu, ar)")
     time.sleep(0)   
 
-    def componentes_mail(_email):
-        _resto = _email.split(".")
-        _usuario = _resto[0].split("@")
-        _descarte = _resto.pop(0)
-        _partes = [_usuario + _resto]
-        return tuple(_partes)
-    
-    # PROGRAMA PRINCIPAL
-    email = input("Ingresar email: ")
-    partes = componentes_mail(email)
-    print(partes)
+    def dividir_direccion_correo(correo):
+        usuario, dominio = correo.split('@')
+        partes_dominio = dominio.split('.')
+        return usuario, *partes_dominio
 
+    # Programa Principal
+    direccion_correo = input("Ingresar correo electronico: ")
+    partes = dividir_direccion_correo(direccion_correo)
+    print(partes)
+    
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
 #EJERCICIO 4
 
@@ -264,6 +262,7 @@ if ejercicio == 11:
     frase = input("Ingresar frase: ")
     palabras = frase.split()
     for palabra in palabras:
+        
         diccionario = contarvocales(palabra)
         print(f"{palabra}:", diccionario)
 
@@ -296,3 +295,27 @@ if ejercicio == 13:
     print('Escribir una funcion buscarclave() que reciba como parametros un diccionario y un valor, y devuelva una lista de claves que apunten ("mapeen") a ese valor en el diccionario. \nComprobar el comportamiento de la funcion medianto un programa apropiado.')
     print()
     time.sleep(0)   
+    
+    def buscarclave(_diccionario, _valor_objetivo):
+        _lista_claves = []
+        _claves = list(_diccionario.keys())
+        _valores = list(_diccionario.values())
+        for i in range(len(_valores)):
+            if _valor_objetivo == _valores[i]:
+                _lista_claves.append(_claves[i])
+        return _lista_claves
+    
+    # Programa Principal
+    diccionario = {}
+    clave = input("Ingresar Clave (Vacio para terminar): ")
+    while clave != "":
+        valor = input(f"Ingresar Valor de '{clave}': ")
+        diccionario[clave] = valor
+        clave = input("Ingresar Clave (Vacio para terminar): ")
+        
+    print(diccionario)
+    valor_objetivo = input("Ingresar Valor a buscar: ")
+    clave_obtenida = buscarclave(diccionario, valor_objetivo)
+    print(f"LISTA DE CLAVES QUE APUNTAN A '{valor_objetivo}':")
+    print(clave_obtenida)
+    
