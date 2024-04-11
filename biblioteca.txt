@@ -1,0 +1,15 @@
+El Quijote;Miguel de Cervantes;Novela;10
+Cien años de soledad;Gabriel García Márquez;Realismo mágico;5
+1984;George Orwell;Ciencia ficción;8
+Harry Potter y la piedra filosofal;J.K. Rowling;Fantasía;12
+Orgullo y prejuicio;Jane Austen;Romance;7
+Matar a un ruiseñor;Harper Lee;Ficción;6
+El Gran Gatsby;F. Scott Fitzgerald;Clásico;9
+Crimen y castigo;Fyodor Dostoevsky;Novela;4
+Los hombres que no amaban a las mujeres;Stieg Larsson;Misterio;11
+La Odisea;Homero;Épico;7
+Los pilares de la Tierra;Ken Follett;Histórico;8
+La sombra del viento;Carlos Ruiz Zafón;Misterio;10
+Don Quijote de la Mancha;Miguel de Cervantes;Clásico;5
+La ladrona de libros;Markus Zusak;Drama;13
+La chica del tren;Paula Hawkins;Suspense;7
